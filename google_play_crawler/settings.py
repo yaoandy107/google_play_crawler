@@ -103,4 +103,4 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 4.0
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Logger setting
-LOG_LEVEL = "WARNING"
+LOG_LEVEL = "INFO"
