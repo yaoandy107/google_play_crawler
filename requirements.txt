@@ -1,2 +1,2 @@
 scrapy
-scrapy-mongodb
+scrapy-mysql-pipeline

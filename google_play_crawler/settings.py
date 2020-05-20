@@ -65,13 +65,20 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy_mongodb.MongoDBPipeline': 0,
+    'scrapy_mysql_pipeline.MySQLPipeline': 300,
 }
+MYSQL_HOST = 'localhost'
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = ''
+MYSQL_DB = 'scrapy'
+MYSQL_TABLE = 'GooglePlay'
+MYSQL_UPSERT = False
+MYSQL_RETRIES = 3
+MYSQL_CLOSE_ON_ERROR = True
+MYSQL_CHARSET = 'utf8mb4'
 
-MONGODB_URI = 'mongodb://localhost:27017'
-MONGODB_DATABASE = 'scrapy'
-MONGODB_COLLECTION = 'google_play'
-MONGODB_UNIQUE_KEY = 'link'
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
