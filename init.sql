@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS
+  scrapy;
+CREATE DATABASE scrapy;
+
+USE scrapy;
+
+CREATE TABLE IF NOT EXISTS GooglePlay(
+  ID            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  Name          VARCHAR(255) NOT NULL,
+  Link          TEXT NOT NULL,
+  LastUpdated   DATE NOT NULL,
+  Author        VARCHAR(255) NOT NULL,
+  Filesize      VARCHAR(255) NOT NULL,
+  Installs      INT UNSIGNED NOT NULL,
+  Version       VARCHAR(255) NOT NULL,
+  Compatibility VARCHAR(255) NOT NULL,
+  ContentRating VARCHAR(255) NOT NULL,
+  Genre         VARCHAR(255) NOT NULL,
+  Price         MEDIUMINT UNSIGNED NOT NULL,
+  RatingValue   FLOAT UNSIGNED NOT NULL,
+  ReviewNumber  INT UNSIGNED NOT NULL,
+  PRIMARY KEY (ID)
+);
