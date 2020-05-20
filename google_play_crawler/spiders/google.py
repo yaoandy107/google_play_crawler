@@ -11,15 +11,23 @@ class GoogleSpider(CrawlSpider):
     start_urls = ["https://play.google.com/store/apps/"]
 
     rules = (
-        Rule(LinkExtractor(allow=('/store/apps',), deny=('/store/apps/details', )), follow=True),
-        Rule(LinkExtractor(allow=("/store/apps/details", )), follow=True, callback='parse_detail'),
+        Rule(LinkExtractor(allow=('/store/apps',), deny=('/store/apps/details', )), follow=True, process_links='process_links'),
+        Rule(LinkExtractor(allow=("/store/apps/details", )), follow=True, callback='parse_detail', process_links='process_links'),
     )
+
+    def process_links(self, links):
+        for link in links:
+            if '?' in link.url:
+                link.url = "%s&hl=zh-TW" % link.url
+            else:
+                link.url = "%s?hl=zh-TW" % link.url
+        return links
 
     def parse_detail(self,response):
         items = []
         for title in response.xpath('/html'):
             item = GooglePlayCrawlerItem()
-            item["Link"] = title.xpath('head/link[5]/@href').extract_first().rstrip("&hl=en_US")
+            item["Link"] = title.xpath('head/link[4]/@href').extract_first()
             item["Name"] = title.xpath('//*[@id="fcxH9b"]/div[4]/c-wiz/div/div[2]/div/div[1]/div/c-wiz[1]/c-wiz[1]/div/div[2]/div/div[1]/c-wiz[1]/h1/span/text()').extract_first()
             item["LastUpdated"] = datetime.strptime(title.xpath('//div[contains(text(), "更新日期")]/following-sibling::span[1]/div/span/text()').extract_first(), '%Y年%m月%d日').now().date()
             item["Author"] = title.xpath('//div[contains(text(), "提供者：")]/following-sibling::span[1]/div/span/text()').extract_first()
