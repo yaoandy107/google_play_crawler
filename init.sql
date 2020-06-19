@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS GooglePlay(
   Link          TEXT NOT NULL,
   LastUpdated   DATE NOT NULL,
   Author        VARCHAR(255) NOT NULL,
-  Filesize      VARCHAR(255) NOT NULL,
+  Filesize      DOUBLE NOT NULL,
   Installs      INT UNSIGNED NOT NULL,
   Version       VARCHAR(255) NOT NULL,
   Compatibility VARCHAR(255) NOT NULL,
